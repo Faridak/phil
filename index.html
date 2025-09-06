@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philosophy Timeline: From Crisis to Clarity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #3498db, #e74c3c);
+            transform: translateX(-50%);
+        }
+        
+        .era {
+            position: relative;
+            margin: 40px 0;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .era:nth-child(odd) .era-content {
+            margin-left: 0;
+            margin-right: 55%;
+            text-align: right;
+        }
+        
+        .era:nth-child(even) .era-content {
+            margin-left: 55%;
+            margin-right: 0;
+        }
+        
+        .era-content {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .era-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #3498db;
+        }
+        
+        .era-marker {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: #3498db;
+            border: 4px solid white;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 4px #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .era:hover .era-marker {
+            background: #e74c3c;
+            box-shadow: 0 0 0 4px #e74c3c;
+            transform: translateX(-50%) scale(1.2);
+        }
+        
+        .era-period {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .era-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .philosophers {
+            margin: 15px 0;
+        }
+        
+        .philosopher {
+            display: inline-block;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 5px 12px;
+            margin: 3px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .philosopher:hover {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            transform: scale(1.05);
+        }
+        
+        .key-ideas {
+            font-style: italic;
+            color: #555;
+            line-height: 1.5;
+            margin-top: 10px;
+        }
+        
+        .crisis-note {
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        
+        .modern-crisis {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .modern-crisis h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modern-crisis p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .era:nth-child(1) { animation-delay: 0.1s; }
+        .era:nth-child(2) { animation-delay: 0.2s; }
+        .era:nth-child(3) { animation-delay: 0.3s; }
+        .era:nth-child(4) { animation-delay: 0.4s; }
+        .era:nth-child(5) { animation-delay: 0.5s; }
+        .era:nth-child(6) { animation-delay: 0.6s; }
+        .era:nth-child(7) { animation-delay: 0.7s; }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .era:nth-child(odd) .era-content,
+            .era:nth-child(even) .era-content {
+                margin-left: 50px;
+                margin-right: 0;
+                text-align: left;
+            }
+            
+            .era-marker {
+                left: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>From Crisis to Clarity: A Philosophical Timeline</h1>
+        
+        <div class="timeline">
+            <div class="era">
+                <div class="era-marker"></div>
+                <div class="era-content">
+                    <div class="era-period">5th-4th Century BCE</div>
+                    <div class="era-title">Classical Foundation</div>
+                    <div class="philosophers">
+                        <span class="philosopher">Socrates</span>
+                        <span class="philosopher">Plato</span>
+                    </div>
+                    <div class="key-ideas">
+                        Rational inquiry, eternal Forms, philosophical method of questioning
+                    </div>
+                    <div class="crisis-note">
+                        ⚡ Crisis: Athenian democracy, moral relativism of Sophists
+                    </div>
+                </div>
+            </div>
+            
+            <div class="era">
+                <div class="era-marker"></div>
+                <div class="era-content">
+                    <div class="era-period">4th Century BCE - 13th Century CE</div>
+                    <div class="era-title">Empiricism & Medieval Synthesis</div>
+                    <div class="philosophers">
+                        <span class="philosopher">Aristotle</span>
+                        <span class="philosopher">Thomas Aquinas</span>
+                    </div>
+                    <div class="key-ideas">
+                        Empirical observation, scholastic method, faith-reason integration
+                    </div>
+                    <div class="crisis-note">
+                        ⚡ Crisis: Rise of Christianity, need to reconcile faith and reason
+                    </div>
+                </div>
+            </div>
+            
+            <div class="era">
+                <div class="era-marker"></div>
+                <div class="era-content">
+                    <div class="era-period">16th-18th Century</div>
+                    <div class="era-title">Early Modern Shift</div>
+                    <div class="philosophers">
+                        <span class="philosopher">René Descartes</span>
+                        <span class="philosopher">John Locke</span>
+                    </div>
+                    <div class="key-ideas">
+                        Methodic doubt, cogito, empiricism, mind as blank slate
+                    </div>
+                    <div class="crisis-note">
+                        ⚡ Crisis: Scientific revolution, religious wars, collapse of medieval worldview
+                    </div>
+                </div>
+            </div>
+            
+            <div class="era">
+                <div class="era-marker"></div>
+                <div class="era-content">
+                    <div class="era-period">Late 18th-19th Century</div>
+                    <div class="era-title">German Idealism</div>
+                    <div class="philosophers">
+                        <span class="philosopher">Immanuel Kant</span>
+                        <span class="philosopher">G.W.F. Hegel</span>
+                    </div>
+                    <div class="key-ideas">
+                        Critical philosophy, dialectical method, Spirit unfolding in history
+                    </div>
+                    <div class="crisis-note">
+                        ⚡ Crisis: Enlightenment's limits, French Revolution, industrial upheaval
+                    </div>
+                </div>
+            </div>
+            
+            <div class="era">
+                <div class="era-marker"></div>
+                <div class="era-content">
+                    <div class="era-period">19th Century</div>
+                    <div class="era-title">Critique of Idealism</div>
+                    <div class="philosophers">
+                        <span class="philosopher">Schopenhauer</span>
+                        <span class="philosopher">Karl Marx</span>
+                        <span class="philosopher">Nietzsche</span>
+                    </div>
+                    <div class="key-ideas">
+                        Pessimism, historical materialism, revaluation of values, Übermensch
+                    </div>
+                    <div class="crisis-note">
+                        ⚡ Crisis: Industrial capitalism, class struggle, death of God
+                    </div>
+                </div>
+            </div>
+            
+            <div class="era">
+                <div class="era-marker"></div>
+                <div class="era-content">
+                    <div class="era-period">20th Century</div>
+                    <div class="era-title">Language, Power & Deconstruction</div>
+                    <div class="philosophers">
+                        <span class="philosopher">Heidegger</span>
+                        <span class="philosopher">Hannah Arendt</span>
+                        <span class="philosopher">Wittgenstein</span>
+                        <span class="philosopher">Derrida</span>
+                    </div>
+                    <div class="key-ideas">
+                        Existential authenticity, totalitarianism critique, language games, deconstruction
+                    </div>
+                    <div class="crisis-note">
+                        ⚡ Crisis: Two World Wars, Holocaust, totalitarian regimes, nuclear threat
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modern-crisis">
+            <h2>Today's Challenge</h2>
+            <p>We face climate disaster, algorithmic manipulation, and spiritual confusion—yet new philosophical responses are stifled by economic utility, ideological policing, and the demand for immediate "performance." The question remains: can authentic thought survive the age of noise?</p>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity
+        document.querySelectorAll('.era-content').forEach(content => {
+            content.addEventListener('click', function() {
+                this.style.background = this.style.background === 'rgb(52, 152, 219)' ? 'white' : '#3498db';
+                this.style.color = this.style.color === 'white' ? '#333' : 'white';
+            });
+        });
+
+        // Smooth scrolling animation on load
+        window.addEventListener('load', function() {
+            const eras = document.querySelectorAll('.era');
+            eras.forEach((era, index) => {
+                setTimeout(() => {
+                    era.style.opacity = '1';
+                    era.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
